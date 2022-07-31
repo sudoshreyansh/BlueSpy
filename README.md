@@ -16,3 +16,20 @@ It's an aggregated score of the previous 3 scores that helps  cluster packages i
   - 5-7: require manual code reviews before use,
   - 7+: can be considered safe.
 
+## Usage
+
+The backend server is a Docker container and requires GitHub Auth Token as an .env file:
+```
+GITHUB_AUTH_TOKEN=<TOKEN>
+```
+Then the image can be built and a container can be started listening on port 3000 using Docker:
+
+```
+docker build -t <IMAGE_NAME> .
+docker run --rm -p 3000:3000 ---env-file=.env <IMAGE_NAME>
+```
+
+The frontend can be started using:
+```
+npm i && npm start
+```
