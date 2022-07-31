@@ -5,9 +5,9 @@ const RegistryRegex = {
 }
 
 function parseUrl(url) {
-    const parsed = false
+    let parsed = false
     Object.keys(RegistryRegex).some(key => {
-        const match = RegistryRegex[key].match(url)
+        const match = url.match(RegistryRegex[key])
         if ( match && match.length > 0 ) {
             parsed = {
                 registry: key,

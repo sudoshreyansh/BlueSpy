@@ -9,13 +9,18 @@ function startTask(req, res) {
     const url = req.query.url
     const taskScheduled = TaskService.startTask(url)
     
-    if ( taskScheduled ) {
+    if ( !taskScheduled ) {
         return res.json({message: 'Invalid URL', scheduled: false})
     } else {
         return res.json({scheduled: true})
     }
 }
 
+function getTaskStatus(req, res) {
+    res.json(StatusService.getTaskOutput())
+}
+
 export default {
-    startTask
+    startTask,
+    getTaskStatus
 }

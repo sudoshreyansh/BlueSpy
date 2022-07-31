@@ -11,7 +11,7 @@ function setTaskStatus(_status) {
 }
 
 function getTaskStatus() {
-    return runningStatus || Date.now() - completionTime > 1000*60
+    return runningStatus || Date.now() - completionTime < 1000*60
 }
 
 function getTaskOutput() {

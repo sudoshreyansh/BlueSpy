@@ -40,7 +40,9 @@ function mapper(output) {
 
 async function execute(url) {
     const registryFlag = generateRegistryFlag(url)
+    console.log(registryFlag)
     const data = await checkWithScorecard(registryFlag)
+    console.log(data)
     return mapper(data)
 }
 

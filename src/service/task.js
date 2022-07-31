@@ -1,16 +1,18 @@
 import urlUtil from '../util/url.js'
 import StatusService from './status.js'
-import ScorecardService from './scorecard.js'
+import ScorecardService from './tasks/scorecard.js'
+import AppInspectorService from './tasks/appinspector.js'
 
 const Tasks = {
-    'scorecard': ScorecardService
+    'scorecard': ScorecardService,
+    'appinspector': AppInspectorService
 }
 
 let parsedUrl
 
 async function _taskManager() {
     for ( const task in Tasks ) {
-        const result = await task.execute(parsedUrl)
+        const result = await Tasks[task].execute(parsedUrl)
         StatusService.addTaskOutput(task, result)
     }
 
