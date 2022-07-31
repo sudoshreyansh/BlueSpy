@@ -1,1 +1,0 @@
-docker run -it -p 3000:3000 --env-file=.env --rm grid
