@@ -3,7 +3,8 @@ import shellescape from 'shell-escape'
 
 function checkWithScorecard(registryFlag) {
     return new Promise((resolve, reject) => {
-        exec(`/opt/scorecard/scorecard ${registryFlag} --format=json`, (err, stdout) => {
+        exec(`/opt/scorecard/scorecard ${registryFlag} --format=json`, (err, stdout, stderr) => {
+            console.log(stdout, err, stderr)
             const data = JSON.parse(stdout)
             resolve(data)
         })
@@ -40,9 +41,7 @@ function mapper(output) {
 
 async function execute(url) {
     const registryFlag = generateRegistryFlag(url)
-    console.log(registryFlag)
     const data = await checkWithScorecard(registryFlag)
-    console.log(data)
     return mapper(data)
 }
 

@@ -323,7 +323,7 @@ This might be indicativeof typosquatting or the orginal author reserving names. 
         - "same_author"
         """
 
-        print("Typo Evaluating package: {}".format(self.PKG_INPUT_NAME))
+        # print("Typo Evaluating package: {}".format(self.PKG_INPUT_NAME))
 
         results = {
             "popularity_comparison": self.popularity_comparison(),

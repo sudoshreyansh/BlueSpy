@@ -108,9 +108,7 @@ class Analysis_Framework:
             print_frndly = [str(i)+".x.x" for i in skips]
             
             MSG = "There are skips in version num (1st order patch num). Versions skipped: {}".format(print_frndly)
-            # print(MSG)
 
-        # print("skipped versions: ", skips)
         return {"positive": POSITIVE, "msg": MSG}
 
 
@@ -259,9 +257,6 @@ class Analysis_Framework:
                 POSITIVE = True
 
                 MSG += "version {}: \t maintainers: {} \nversion {}: \t maintainers: {}\n\n".format(ver_prev, m_prev, ver_next, m_next)
-                # print("version {}: \t maintainers: {} \nversion {}: \t maintainers: {}\n".format(ver_prev, parse_util.sort_maintainers(m_prev), ver_next, parse_util.sort_maintainers(m_next)))
-
-            # print(ver, maintainers[ver])
 
 
             """
@@ -411,7 +406,7 @@ class Analysis_Framework:
 
     def do_analyse_framework(self):
         
-        print("Analysing package: ", parse_util.get_pkg_name(self.pkg_metadata))
+        # print("Analysing package: ", parse_util.get_pkg_name(self.pkg_metadata))
 
 
         results = {

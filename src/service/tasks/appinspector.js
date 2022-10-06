@@ -1,4 +1,4 @@
-import { exec } from 'child_process'
+import { exec, spawn } from 'child_process'
 
 const ruleCodes = {
     dynamicExecution: ["AI034800","AI034900","AI035000","AI035010","AI035100","AI035200","AI035300","AI035400","AI035500","AI035510","AI035520","AI035530","AI035531","AI035532"],
@@ -11,10 +11,15 @@ const ruleCodes = {
 
 function checkWithAppInspector() {
     return new Promise((resolve, reject) => {
-        exec(`/opt/ApplicationInspector/ApplicationInspector.CLI analyze -x Fatal -S -c Medium,High,Low -f json -s source -N`, (err, stdout) => {
-            if ( err ) resolve({})
-            const data = JSON.parse(stdout)
-            resolve(data)
+        exec('cd source && find .', (err, stdout) => {
+            console.log(err, stdout)
+            let data = ""
+            const p = spawn('/opt/ApplicationInspector/ApplicationInspector.CLI', ['analyze', '-x', 'Fatal', '-S', '-c', 'Medium,High,Low', '-f', 'json', '-s', 'source', '-N'])
+            p.stdout.on('data', d => data += d.toString())
+            p.on('close', () => {
+                // console.log(data)
+                resolve(JSON.parse(data))
+            })
         })
     })
 }
@@ -28,10 +33,12 @@ function mapper(output) {
         fileio: 0,
         os: 0
     }
-    const checks = output.detailedMatchList ?? []
+    const checks = output.metaData.detailedMatchList ?? []
+    console.log(checks)
     for ( const check of checks ) {
         Object.keys(ruleCodes).some(rule => {
             const codes = ruleCodes[rule]
+            console.log(check.ruleId)
             if ( codes.includes(check.ruleId) ) {
                 mappedOut[rule]++;
                 return true;

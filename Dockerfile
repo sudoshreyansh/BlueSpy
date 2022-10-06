@@ -75,6 +75,8 @@ RUN cd /opt && \
     cd OSSGadget && \
     find . -name 'oss-*' -exec file {} \; | grep ELF | cut -d: -f1 | xargs -n1 -I{} chmod a+x {}
 
+RUN pip install pandas requests
+
 RUN cd /home && mkdir bluespy && cd bluespy
 WORKDIR /home/bluespy
 
@@ -84,4 +86,5 @@ RUN yarn install
 EXPOSE 3000
 
 COPY ./src ./src
+RUN cd src/modules/metadata/util/eval/scripts && chmod +x npm-sec.sh
 CMD npm run start

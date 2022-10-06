@@ -2,6 +2,7 @@ import { exec } from 'child_process'
 
 async function downloadGitCode(url) {
     return new Promise((resolve, reject) => {
+        // console.log(url)
         exec(`git clone https://github.com/${url.name} source`, (err, stdout) => {
             console.log(err)
             resolve()
@@ -11,8 +12,9 @@ async function downloadGitCode(url) {
 
 async function downloadPkgCode(pkgUrl) {
     return new Promise((resolve, reject) => {
-        exec(`mkdir source && /opt/OSSGadget/oss-download -e true --download-directory source ${pkgUrl}`, (err, stdout) => {
-            console.log(err)
+        exec(`mkdir source; /opt/OSSGadget/oss-download --download-directory ./source --extract ${pkgUrl}`, (err, stdout, stderr) => {
+            console.log(err, stdout, stderr)
+            console.log('OSS Download', err)
             resolve()
         })
     })
@@ -24,10 +26,10 @@ function generatePkgUrl(url) {
 
 async function execute(url) {
     if ( url.registry === 'github' ) {
-        await downloadGitCode()
+        await downloadGitCode(url)
     } else {
         const pkgUrl = generatePkgUrl(url)
-        downloadPkgCode(pkgUrl)
+        await downloadPkgCode(pkgUrl)
     }
 }
 

@@ -55,7 +55,7 @@ class Evaluator():
 
 
         self.top_1000 = self.top_1000[start:truncate] # top 3 for testing
-        print(self.top_1000)
+        # print(self.top_1000)
         # for i in top_1000: print(i)
 
 
