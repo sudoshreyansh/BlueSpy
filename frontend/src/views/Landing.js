@@ -2,13 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-// components
-
-// import Navbar from "components/Navbars/AuthNavbar.js";
-// import Footer from "components/Footers/Footer.js";
-// import { Redirect } from "react-router";
-// import Admin from "layouts/Admin";
-
 export default function Landing() {
   const navigate = useNavigate();
   let textInput = React.createRef();
